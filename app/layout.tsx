@@ -30,11 +30,20 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: 'https://portfolio-gustavo-omega.vercel.app',
     siteName: "Gustavo Machado Portfolio",
+    images: [
+      {
+        url: 'https://portfolio-gustavo-omega.vercel.app/og-image.svg',
+        alt: 'Gustavo Machado - Portfolio',
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Gustavo Machado - Full-Stack Developer",
     description: "Portfolio de Gustavo Machado - Desenvolvedor Full-Stack",
+    images: ['https://portfolio-gustavo-omega.vercel.app/og-image.svg'],
   },
   robots: {
     index: true,
@@ -54,11 +63,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = 'https://portfolio-gustavo-omega.vercel.app';
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        "url": siteUrl,
+        "name": "Gustavo Machado Portfolio",
+        "description": metadata.description,
+        "publisher": { "@id": `${siteUrl}/#person` }
+      },
+      {
+        "@type": "Person",
+        "@id": `${siteUrl}/#person`,
+        "name": "Gustavo Machado",
+        "jobTitle": "Full-Stack Developer",
+        "url": siteUrl,
+        "sameAs": [siteUrl]
+      }
+    ]
+  };
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>
