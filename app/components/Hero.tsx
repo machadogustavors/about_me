@@ -4,6 +4,17 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
 import { personalInfo } from "@/app/lib/data";
 
+const backgroundCircles = [...Array(20)].map((_, i) => ({
+  key: i,
+  width: Math.random() * 300 + 50,
+  height: Math.random() * 300 + 50,
+  left: `${Math.random() * 100}%`,
+  top: `${Math.random() * 100}%`,
+  animateY: Math.random() * 100 - 50,
+  animateX: Math.random() * 100 - 50,
+  duration: Math.random() * 10 + 10,
+}));
+
 export default function Hero() {
   const scrollToAbout = () => {
     document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
@@ -13,23 +24,23 @@ export default function Hero() {
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
 
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {backgroundCircles.map((circle) => (
           <motion.div
-            key={i}
+            key={circle.key}
             className="absolute bg-white rounded-full opacity-10"
             style={{
-              width: Math.random() * 300 + 50,
-              height: Math.random() * 300 + 50,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              width: circle.width,
+              height: circle.height,
+              left: circle.left,
+              top: circle.top,
             }}
             animate={{
-              y: [0, Math.random() * 100 - 50],
-              x: [0, Math.random() * 100 - 50],
+              y: [0, circle.animateY],
+              x: [0, circle.animateX],
               scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: circle.duration,
               repeat: Infinity,
               repeatType: "reverse",
             }}

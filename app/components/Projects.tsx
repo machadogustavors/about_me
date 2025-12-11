@@ -67,8 +67,8 @@ export default function Projects() {
             onClick={() => setFilter("all")}
             style={{ padding: '0.75rem 1.5rem' }}
             className={`rounded-full font-semibold transition-all ${filter === "all"
-                ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
+              ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white"
+              : "bg-gray-800 text-gray-400 hover:text-white"
               }`}
           >
             Todos
@@ -80,8 +80,8 @@ export default function Projects() {
             }}
             style={{ padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}
             className={`rounded-full font-semibold transition-all ${filter === "featured"
-                ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
+              ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white"
+              : "bg-gray-800 text-gray-400 hover:text-white"
               }`}
           >
             <Star className="w-4 h-4" />
@@ -123,7 +123,7 @@ export default function Projects() {
                 transition={{ duration: 0.5 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
               >
-                {visibleProjects.map((project, index) => (
+                {visibleProjects.map((project) => (
                   <motion.div
                     key={project.id}
                     className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-purple-500/20 group"
@@ -205,8 +205,8 @@ export default function Projects() {
                   key={index}
                   onClick={() => setCurrentPage(index)}
                   className={`transition-all rounded-full ${index === currentPage
-                      ? "w-12 h-3 bg-gradient-to-r from-purple-500 to-cyan-500"
-                      : "w-3 h-3 bg-gray-600 hover:bg-gray-500"
+                    ? "w-12 h-3 bg-gradient-to-r from-purple-500 to-cyan-500"
+                    : "w-3 h-3 bg-gray-600 hover:bg-gray-500"
                     }`}
                 />
               ))}

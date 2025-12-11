@@ -12,6 +12,17 @@ const iconMap = {
   twitter: Twitter,
 };
 
+const backgroundCircles = [...Array(15)].map((_, i) => ({
+  key: i,
+  width: Math.random() * 200 + 50,
+  height: Math.random() * 200 + 50,
+  left: `${Math.random() * 100}%`,
+  top: `${Math.random() * 100}%`,
+  animateY: Math.random() * 50 - 25,
+  animateX: Math.random() * 50 - 25,
+  duration: Math.random() * 8 + 8,
+}));
+
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -20,22 +31,22 @@ export default function Contact() {
     <section id="contact" className="py-24 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden flex flex-col items-center" style={{ padding: '2rem' }}>
 
       <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
+        {backgroundCircles.map((circle) => (
           <motion.div
-            key={i}
+            key={circle.key}
             className="absolute bg-white rounded-full opacity-5"
             style={{
-              width: Math.random() * 200 + 50,
-              height: Math.random() * 200 + 50,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              width: circle.width,
+              height: circle.height,
+              left: circle.left,
+              top: circle.top,
             }}
             animate={{
-              y: [0, Math.random() * 50 - 25],
-              x: [0, Math.random() * 50 - 25],
+              y: [0, circle.animateY],
+              x: [0, circle.animateX],
             }}
             transition={{
-              duration: Math.random() * 8 + 8,
+              duration: circle.duration,
               repeat: Infinity,
               repeatType: "reverse",
             }}
@@ -88,7 +99,7 @@ export default function Contact() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          {contactInfo.socialLinks.map((link, index) => {
+          {contactInfo.socialLinks.map((link) => {
             const Icon = iconMap[link.icon as keyof typeof iconMap];
             return (
               <motion.a
