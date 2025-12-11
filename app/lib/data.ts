@@ -5,7 +5,7 @@ export const personalInfo = {
   tagline: "Construindo aplicações web rápidas, escaláveis e de alta qualidade",
   email: "machado.gustavo2905@gmail.com",
   github: "https://github.com/machadogustavors",
-  linkedin: "www.linkedin.com/in/gustavo-machado-416326215",
+  linkedin: "https://www.linkedin.com/in/gustavo-machado-416326215",
   location: "Brasil",
 };
 
@@ -64,13 +64,41 @@ export const skills = [
 export const projects = [
   {
     id: 1,
-    title: "SaaS Platform",
-    description: "Plataforma SaaS completa com autenticação, pagamentos e dashboard interativo para gerenciamento de clientes.",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Stripe", "AWS"],
-    image: "/projects/saas.jpg",
-    github: "https://github.com/machadogustavors/projeto",
+    title: "Scheduly - Agendamentos de tarefas online",
+    description: "Plataforma de uso pessoal para agendamento de tarefas e compromissos, estilo calendário do Microsoft Teams com notificações desktop.",
+    technologies: ["React", "TypeScript", "Python", "DynamoDB", "AWS"],
+    image: "/projects/scheduly.png",
+    github: [
+      { label: "Frontend", url: "https://github.com/machadogustavors/scheduly_frontend" },
+      { label: "Backend", url: "https://github.com/machadogustavors/scheduly_backend" },
+    ],
     demo: "",
     featured: true,
+  },
+  {
+    id: 2,
+    title: "WM Manager - Sistema de gestão para oficina mecânica",
+    description: "Plataforma de gestão completa para oficina com controle de serviços.",
+    technologies: ["React", "TypeScript", "Python", "DynamoDB", "AWS"],
+    image: "/projects/wm_manager.png",
+    github: [
+      { label: "Frontend", url: "https://github.com/machadogustavors/wm_manager_front" },
+      { label: "Backend", url: "https://github.com/machadogustavors/wm_manager_back" },
+    ],
+    demo: "",
+    featured: true,
+  },
+  {
+    id: 3,
+    title: "Project Coordinator - Sistema de gestão para projetos pessoais",
+    description: "Plataforma de gestão completa para projetos pessoais com controle de tarefas, prazos e progresso.",
+    technologies: ["Next.js", "TypeScript", "Prisma", "Vercel"],
+    image: "/projects/project_coordinator.png",
+    github: [
+      { label: "Project", url: "https://github.com/machadogustavors/project_coordinator" },
+    ],
+    demo: "",
+    featured: false,
   },
 ];
 
@@ -86,7 +114,7 @@ export const contactInfo = {
     },
     {
       name: "LinkedIn",
-      url: "www.linkedin.com/in/gustavo-machado-416326215",
+      url: "https://www.linkedin.com/in/gustavo-machado-416326215",
       icon: "linkedin",
     },
   ],

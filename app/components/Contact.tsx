@@ -101,6 +101,7 @@ export default function Contact() {
         >
           {contactInfo.socialLinks.map((link) => {
             const Icon = iconMap[link.icon as keyof typeof iconMap];
+            console.log(link.url)
             return (
               <motion.a
                 key={link.name}

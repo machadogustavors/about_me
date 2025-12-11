@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { projects } from "@/app/lib/data";
+import Image from "next/image";
 import { Github, ExternalLink, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Projects() {
@@ -12,6 +13,7 @@ export default function Projects() {
   const [filter, setFilter] = useState<"all" | "featured">("all");
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [lightbox, setLightbox] = useState<{ src: string; title?: string } | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -129,12 +131,20 @@ export default function Projects() {
                     className="bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-purple-500/20 group"
                     whileHover={{ y: -10, borderColor: "rgba(168, 85, 247, 0.5)" }}
                   >
-                    <div className="relative h-48 bg-gradient-to-br from-purple-900/50 to-cyan-900/50 overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-6xl font-bold text-white/10">
-                          {project.title.charAt(0)}
+                    <div
+                      className="relative h-48 overflow-hidden bg-gray-800"
+                      onClick={() => project.image && setLightbox({ src: project.image, title: project.title })}
+                      role={project.image ? "button" : undefined}
+                      aria-label={project.image ? `Abrir imagem de ${project.title}` : undefined}
+                      style={{ cursor: project.image ? 'zoom-in' : 'default' }}
+                    >
+                      {project.image ? (
+                        <Image src={project.image} alt={project.title} fill className="object-cover" />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900/50 to-cyan-900/50">
+                          <div className="text-6xl font-bold text-white/10">{project.title.charAt(0)}</div>
                         </div>
-                      </div>
+                      )}
                       {project.featured && (
                         <div style={{ padding: '0.75rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="absolute top-4 right-4 bg-yellow-500 text-gray-900 rounded-full font-semibold text-sm">
                           <Star className="w-4 h-4 fill-current" />
@@ -165,17 +175,36 @@ export default function Projects() {
 
                       <div className="flex gap-4">
                         {project.github && (
-                          <motion.a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <Github className="w-5 h-5" />
-                            <span>Código</span>
-                          </motion.a>
+                          <>
+                            {Array.isArray(project.github) ? (
+                              project.github.map((repo) => (
+                                <motion.a
+                                  key={repo.label}
+                                  href={repo.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                >
+                                  <Github className="w-5 h-5" />
+                                  <span>{repo.label}</span>
+                                </motion.a>
+                              ))
+                            ) : (
+                              <motion.a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                              >
+                                <Github className="w-5 h-5" />
+                                <span>Código</span>
+                              </motion.a>
+                            )}
+                          </>
                         )}
                         {project.demo && (
                           <motion.a
@@ -214,6 +243,35 @@ export default function Projects() {
           )}
         </div>
       </div>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+          onClick={() => setLightbox(null)}
+        >
+          <div className="max-w-6xl w-full p-6" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute top-6 right-6 z-60 p-3 bg-white/10 rounded-full hover:bg-white/20 transition text-white"
+              aria-label="Fechar imagem"
+            >
+              ✕
+            </button>
+            <div className="rounded-lg overflow-hidden bg-gray-900 p-4">
+              <div className="mx-auto max-h-[80vh] flex items-center justify-center">
+                <Image
+                  src={lightbox.src}
+                  alt={lightbox.title || 'Imagem do projeto'}
+                  width={1200}
+                  height={800}
+                  className="object-contain"
+                />
+              </div>
+              {lightbox.title && <div className="text-center text-white mt-4">{lightbox.title}</div>}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
