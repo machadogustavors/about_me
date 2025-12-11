@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://seudominio.com/sitemap.xml
+Sitemap: https://portfolio-gustavo-omega.vercel.app/sitemap.xml

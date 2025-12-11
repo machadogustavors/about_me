@@ -9,7 +9,7 @@
 
   **Portfolio moderno e interativo com animações fluidas e design responsivo**
 
-  [🌐 Ver Demo](#) | [📝 Documentação](#características) | [🐛 Reportar Bug](https://github.com/machadogustavors/about_me/issues)
+  [🌐 Ver Demo](https://portfolio-gustavo-omega.vercel.app) | [📝 Documentação](#características) | [🐛 Reportar Bug](https://github.com/machadogustavors/about_me/issues)
 
 </div>
 

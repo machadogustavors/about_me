@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Gustavo Machado" }],
   creator: "Gustavo Machado",
   publisher: "Gustavo Machado",
-  metadataBase: new URL('https://seudominio.com'),
+  metadataBase: new URL('https://portfolio-gustavo-omega.vercel.app'),
   alternates: {
     canonical: '/',
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: "Portfolio de Gustavo Machado - Desenvolvedor Full-Stack especializado em React, Next.js, TypeScript, Node.js e AWS",
     type: "website",
     locale: "pt_BR",
-    url: 'https://seudominio.com',
+    url: 'https://portfolio-gustavo-omega.vercel.app',
     siteName: "Gustavo Machado Portfolio",
   },
   twitter: {
